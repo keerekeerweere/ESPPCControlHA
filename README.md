@@ -1,8 +1,10 @@
-# ESPHome PC Power Control via Home Assistant
+# ESPHome PC Control via Home Assistant
 
-This project contains remote PC power control via HomeAssistant and ESPHome ESP8266/ESP32 boards.
+This project contains remote PC power and reset control via HomeAssistant and ESPHome ESP8266/ESP32 boards.
 
-I use this project to power my PC based NAS remotely on and off via Home Assistant as alternative to Wake-On-Lan (WOL) which has known limitations.
+I use this project to power my PC based systems remotely on, off, reset via Home Assistant as alternative to Wake-On-Lan (WOL) which has known limitations and as alternative to genuine bmc/ipmi based solutions.
+
+Based on the work done by [Erriez](https://github.com/Erriez/ESPHomePCPowerControlHomeAssistant) 
 
 ## Features
 
@@ -11,16 +13,20 @@ I use this project to power my PC based NAS remotely on and off via Home Assista
   * Graceful `shutdown/suspend/hybernate` of the operating system (Behavior short press power button).
   * Force power-off (Behavior long press power-button).
 * Read PC power on/off status from motherboard.
+* Control physical PC Reset button (front panel) connected to the motherboard:
+  * Hard reset PC on from any power state
+* Full keyboard and mouse control using a builtin HID through the connected USB on ESP32-S2 or ESP32-S3 boards
 * No operating system dependency.
-* Power/reset buttons front panel remains full functional.
+* Power buttons front panel remains full functional.
+* Reset buttons front panel remains full functional.
 * User authorization via Homeassistant.
 * Use with any (micro/mini)-ATX computer motherboard.
 
-Youtube video:
+Original Youtube video:
 
 [![Youtube video](https://img.youtube.com/vi/rAcvqaPf830/0.jpg)](https://www.youtube.com/watch?v=rAcvqaPf830)
 
-Homeassistant screenshot:
+Original Homeassistant screenshot:
 
 ![Screenshot Home Assistant](images/ScreenshotHomeAssistant.jpg)
 
@@ -35,6 +41,9 @@ Homeassistant screenshot:
   * Requires sudo rights.
 * Wake-On-Lan magic packets are ignored when connecting main power the first time to the power supply, even when WOL is activated in the BIOS. The reason is that WOL is disabled on most computers at first power on and requires activation by a running operating system before the PC responds on a magic packet to wake the computer. Reference: [Ubuntu Wake-On-Lan](https://help.ubuntu.com/community/WakeOnLan).
 * Running Homeassistant [Wake-On-Lan](https://www.home-assistant.io/integrations/wake_on_lan) in a Docker container cannot forward broadcast magic packets with a bridged network configuration. It requires an external Docker container as bridge to forward magic packages and is beyond the scope of Homeassistant. This is currently not included in Homeassistant documentation.
+
+## Differences BMC / ipmi 
+
 
 ## Hardware
 
@@ -267,3 +276,7 @@ Restart Home Assistant and ready to go!
   * Rename `switch.pc_power_button` to `switch.pc_power_toggle`.
   * Rename `switch.pc_power_button_long_press` to `switch.pc_hard_power_off`.
   * Rename `switch.pc_power_sense` to `switch.pc_power_state`.
+
+### Update 7 April 2024
+
+* updated initials thoughts for extension in the readme, no actual work done yet
