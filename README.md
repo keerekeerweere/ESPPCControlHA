@@ -60,7 +60,7 @@ Original Homeassistant screenshot:
   * I want to keep the cost as low as possible. KVM IPMI or even PiKVM are in another price range.
     * If hdmi output is not a requirement the cost can be < 10 EUR or even below 5 EUR if using existing spare parts
     * Ideally this project is picked up by a low cost maker to produce a PCB Board with optocouplers and such that can easily be retrofitted to most consumer motherboards using an usb header cable
-    * recent esp32 boards should become powerful enough to also take care of the hdmi input, but that's beyond a 2 EUR ESP32-S2 board 
+    * recent esp32 boards should/have become powerful enough to also take care of the hdmi input, but that's beyond a 2 EUR ESP32-S2 board 
 
 ## Hardware
 
