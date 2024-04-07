@@ -22,6 +22,11 @@ Based on the work done by [Erriez](https://github.com/Erriez/ESPHomePCPowerContr
 * User authorization via Homeassistant.
 * Use with any (micro/mini)-ATX computer motherboard.
 
+## Ideas
+
+* use the ESP32-S2 onboard USB HID to allow remote control of the PC using a virtual keyboard (and mouse)
+* connect a combination of other PC device or raspberry pi with a USB HDMI to view screen output  
+
 Original Youtube video:
 
 [![Youtube video](https://img.youtube.com/vi/rAcvqaPf830/0.jpg)](https://www.youtube.com/watch?v=rAcvqaPf830)
@@ -42,8 +47,20 @@ Original Homeassistant screenshot:
 * Wake-On-Lan magic packets are ignored when connecting main power the first time to the power supply, even when WOL is activated in the BIOS. The reason is that WOL is disabled on most computers at first power on and requires activation by a running operating system before the PC responds on a magic packet to wake the computer. Reference: [Ubuntu Wake-On-Lan](https://help.ubuntu.com/community/WakeOnLan).
 * Running Homeassistant [Wake-On-Lan](https://www.home-assistant.io/integrations/wake_on_lan) in a Docker container cannot forward broadcast magic packets with a bridged network configuration. It requires an external Docker container as bridge to forward magic packages and is beyond the scope of Homeassistant. This is currently not included in Homeassistant documentation.
 
-## Differences BMC / ipmi 
+## Differences BMC / ipmi / KVM 
 
+* the idea is to make an ultra low cost KVM device that allows:
+  * remote control
+  * keyboard input (and mouse control) 
+  * feedback trough HDMI or serial port
+
+* it's getting closer to a ipmi or KVM solution but of course is nowhere near the Aspeed BMC or professional KVM solutions, or even the PIKVM based ones
+  * I have a couple of IPMI based servers in a homelab that offer great comfort in installing and controlling 
+  * I also have a couple of consumer grade hardware that is lacking these features. WOL works to start the machines, but better control is the goal if this extension
+  * I want to keep the cost as low as possible. KVM IPMI or even PiKVM are in another price range.
+    * If hdmi output is not a requirement the cost can be < 10 EUR or even below 5 EUR if using existing spare parts
+    * Ideally this project is picked up by a low cost maker to produce a PCB Board with optocouplers and such that can easily be retrofitted to most consumer motherboards using an usb header cable
+    * recent esp32 boards should become powerful enough to also take care of the hdmi input, but that's beyond a 2 EUR ESP32-S2 board 
 
 ## Hardware
 
